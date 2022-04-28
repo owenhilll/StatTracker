@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Demo - Simple parallax scrolling tutorial</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<script>
+        function loadTeams(){    
+            var url = `http://localhost:5000/stats/` + document.getElementById("teams").value;
+            console.log(url);
+            $.ajax({url:url, dataType:"json"}).then(function(data) {
+				document.getElementById("name").innerHTML += (data.name).toLocaleString();
+                document.getElementById("wins").innerHTML += (data.wins).toLocaleString();
+				document.getElementById("losses").innerHTML += (data.losses).toLocaleString();
+				document.getElementById("pf").innerHTML += (data.pointsf).toLocaleString();
+				document.getElementById("pa").innerHTML += (data.pointsa).toLocaleString();
+				document.getElementById("statsMLB").style.display = "";
+            })
+        }
+        </script>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+		<!--
+			* This demo was prepared for you by Petr Tichy - Ihatetomatoes.net
+			* Want to see more similar demos and tutorials?
+			* Help by spreading the word about Ihatetomatoes blog.
+			* Facebook - https://www.facebook.com/ihatetomatoesblog
+			* Twitter - https://twitter.com/ihatetomatoes
+			* Google+ - https://plus.google.com/u/0/109859280204979591787/about
+		-->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+        <style type="text/css">
+			body {
+				font-family: 'Open Sans', sans-serif;
+			}
+		</style>
+    </head>
+    <body class="loading">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+       	
+       	<div id="preload">
+	       	<img src="mlb3.webp">
+	       	<img src="img/nba.png">
+	       	<img src="img/bcg_slide-3.jpg">
+	       	<img src="img/bcg_slide-4.jpg">
+       	</div>
+       	
+       	<main>
+       	 
+	        <section id="slide-1" class="homeSlide">
+				<div class="bcg"
+					data-center="background-position: 50% 0px;"
+					data-top-bottom="background-position: 50% -100px;"
+					data-anchor-target="#slide-1"
+				>
+					<div class="hsContainer">
+						<div class="hsContent"
+							data-center="bottom: 200px; opacity: 1"
+							data-top="bottom: 1200px; opacity: 0"
+							data-anchor-target="#slide-1 h2"
+						>
+							<h2><div id="fillpage" class="jumbotron">
+								<!-- <h5> Pick any state then click submit! </h5> -->
+									<form>
+									<div id="dropdown" class="form-group row align-items-center">
+										<div class="form-group col-md-3">
+											<label id="dropdown" for="States"><h4>Choose an MLB Team for 2021 Stats(Includes Preseason):</h4></label>
+										</div>
+										<div class=" form-group col-md-3">
+											<select name="teams" id="teams" class="form-control">
+												<option selected disabled hidden>Select...</option>
+												<option value="ArizonaDiamondBacks">DiamondBacks</option>
+												<option value="AtlantaBraves">Braves </option>
+												<option value="BostonRedSox">Red Sox</option>
+												<option value="ChicagoWhiteSox">White Sox</option>
+												<option value="BaltimoreOrioles">Orioles</option>
+												<option value="ChicagoCubs">Cubs</option>
+												<option value="CincinnatiReds">Reds</option>
+												<option value="ClevelandIndians">Inidans</option>
+												<option value="ColoradoRockies">Rockies</option>
+												<option value="DetroitTigers">Tigers</option>
+												<option value="HoustonAstros">Astros</option>
+												<option value="KansasCityRoyals">Royals</option>
+												<option value="LosAngelesDodgers">Dodgers</option>
+												<option value="MiamiMarlins">Marlins</option>
+												<option value="MilwaukeeBrewers">Brewers</option>
+												<option value="MinnesotaTwins">Twins</option>
+												<option value="NewYorkYankees">Yankees</option>
+												<option value="NewYorkMets">Mets</option>
+												<option value="OaklandAthletics">Atheletics</option>
+												<option value="PhiladelphiaPhillies">Phillies</option>
+												<option value="PittsburghPirates">Pirates</option>
+												<option value="SanDiegoPadres">Padres</option>
+												<option value="SanFranciscoGiants">Giants</option>
+												<option value="SeattleMariners">Mariners</option>
+												<option value="StLouisCardinals">Cardinals</option>
+												<option value="TampaBayRays">Rays</option>
+												<option value="TexasRangers">Rangers</option>
+												<option value="TorontoBlueJays">BlueJays</option>
+												<option value="WashingtonNationals">Nationals</option>
+												
+												
+											</select>
+										</div>
+										<div class="form-group col">
+											<button id="bold" type="button" class="btn btn-primary" onclick="loadTeams()">Submit</button>
+										</div>
+										<div class = "fixed" id="statsMLB" style="display:none;" >
+											<p1 id="name">TEAM NAME: </p1> <br>
+											<p1 id="wins">WINS: </p1> <br>
+											<p1 id="losses">LOSSES: </p1> <br>
+											<p1 id="pf">POINTS FOR: </p1> <br>
+											<p1 id="pa">POINTS AGAINST: </p1>
+										</div>
+									</div>
+									</form>
+								</div>
+							</h2>
+						</div>
+					</div>
+				</div>
+			</section>
+		    
+		    <section id="slide-2" class="homeSlide">
+				<div class="bcg"
+					data-center="background-position: 50% 0px;"
+					data-top-bottom="background-position: 50% -100px;"
+					data-bottom-top="background-position: 50% 100px;"
+					data-anchor-target="#slide-2"
+				>
+					<div class="hsContainer">
+						<div class="hsContent"
+							data-center="opacity: 1"
+							data-center-top="opacity: 0"
+							data--100-bottom="opacity: 0;"
+							data-anchor-target="#slide-2"
+						>
+							<h2>COMING SOON ... (NBA STATS)</h2>
+						</div>
+					</div>
+				</div>
+			</section>
+		    
+			<section id="slide-3" class="homeSlide">
+				
+				<div class="bcg"
+					data-center="background-position: 50% 0px;"
+					data-top-bottom="background-position: 50% -100px;"
+					data-bottom-top="background-position: 50% 100px;"
+					data-anchor-target="#slide-3"
+				>
+					<div class="hsContainer">
+						<div class="hsContent"
+							data--50-bottom="opacity: 0;"
+							data--200-bottom="opacity: 1;"
+							data-center="opacity: 1"
+							data-200-top="opacity: 0"
+							data-anchor-target="#slide-3 h2"
+						>
+							<h2> COMING SOON ... (NFL STATS)</h2>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+		
+		    
+		</main>
+
+        <script src="js/vendor/jquery-1.9.1.min.js"></script>
+        <script src="js/imagesloaded.js"></script>
+        <script src="js/skrollr.js"></script>
+        <script src="js/scroll.js"></script>
+
+    </body>
+</html>
